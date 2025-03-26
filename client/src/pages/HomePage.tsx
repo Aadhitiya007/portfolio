@@ -8,17 +8,13 @@ import RetroHeader from "../components/RetroHeader";
 import RetroFooter from "../components/RetroFooter";
 import GameScreen from "../components/GameScreen";
 import MarioBackground from "../components/MarioBackground";
+import { useSoundEffects } from "../hooks/useSoundEffects";
 
-// Game sounds
+// Game sounds for UI effects (not background music)
 const sounds = {
   select: new Howl({
     src: ["/sounds/select.mp3"],
     volume: 0.5
-  }),
-  background: new Howl({
-    src: ["/sounds/background.mp3"],
-    volume: 0.3,
-    loop: true
   })
 };
 
@@ -26,6 +22,7 @@ export default function HomePage() {
   const [currentScreen, setCurrentScreen] = useState<string>("intro");
   const [soundEnabled, setSoundEnabled] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const soundEffects = useSoundEffects();
   
   // Handle loading screen
   useEffect(() => {
@@ -39,20 +36,30 @@ export default function HomePage() {
   // Handle sound toggle
   const toggleSound = () => {
     if (soundEnabled) {
-      sounds.background.pause();
+      soundEffects.pauseBackgroundMusic();
     } else {
-      sounds.background.play();
+      soundEffects.playBackgroundMusic();
     }
     setSoundEnabled(!soundEnabled);
   };
   
   // Navigate to a different screen
   const navigateTo = (screen: string) => {
-    if (soundEnabled) {
-      sounds.select.play();
+    // Try to play selection sound if available
+    try {
+      if (soundEnabled && sounds.select) {
+        sounds.select.play();
+      }
+    } catch (e) {
+      console.log("Selection sound not available");
     }
     setCurrentScreen(screen);
   };
+  
+  // Update local soundEnabled state when background music status changes
+  useEffect(() => {
+    setSoundEnabled(soundEffects.isBackgroundMusicPlaying);
+  }, [soundEffects.isBackgroundMusicPlaying]);
   
   // Keyboard navigation
   useEffect(() => {

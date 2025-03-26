@@ -94,7 +94,7 @@ export default function GameScreen({ currentScreen, navigateTo }: GameScreenProp
               <motion.div
                 variants={itemVariants}
               >
-                <button
+                <motion.button
                   onClick={() => navigateTo('about')}
                   className="font-bold text-xl px-12 py-4 rounded focus:outline-none"
                   style={{ 
@@ -109,7 +109,7 @@ export default function GameScreen({ currentScreen, navigateTo }: GameScreenProp
                   whileTap={{ scale: 0.95, y: 5, boxShadow: '0px 2px 0px #000' }}
                 >
                   PRESS START
-                </button>
+                </motion.button>
               </motion.div>
               
               <motion.div 
@@ -217,7 +217,7 @@ export default function GameScreen({ currentScreen, navigateTo }: GameScreenProp
               className="flex justify-center gap-4 mt-8"
               variants={itemVariants}
             >
-              <button
+              <motion.button
                 onClick={() => navigateTo('intro')}
                 className="px-4 py-2 rounded font-bold focus:outline-none"
                 style={{ 
@@ -231,8 +231,8 @@ export default function GameScreen({ currentScreen, navigateTo }: GameScreenProp
                 whileTap={{ scale: 0.95, y: 3 }}
               >
                 ← BACK
-              </button>
-              <button
+              </motion.button>
+              <motion.button
                 onClick={() => navigateTo('skills')}
                 className="px-4 py-2 rounded font-bold focus:outline-none"
                 style={{ 
@@ -246,7 +246,7 @@ export default function GameScreen({ currentScreen, navigateTo }: GameScreenProp
                 whileTap={{ scale: 0.95, y: 3 }}
               >
                 NEXT →
-              </button>
+              </motion.button>
             </motion.div>
           </motion.div>
         )}
