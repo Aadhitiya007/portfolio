@@ -7,7 +7,7 @@ import { Howl } from "howler";
 import RetroHeader from "../components/RetroHeader";
 import RetroFooter from "../components/RetroFooter";
 import GameScreen from "../components/GameScreen";
-import RetroBackground from "../components/RetroBackground";
+import MarioBackground from "../components/MarioBackground";
 
 // Game sounds
 const sounds = {
@@ -126,13 +126,9 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-green-500 font-mono crt-scanline relative">
-      {/* Dynamic Matrix-like Background */}
-      <RetroBackground 
-        density={80} 
-        speed={0.8} 
-        color="rgba(0, 255, 0, 0.7)" 
-      />
+    <div className="min-h-screen relative">
+      {/* Super Mario Background */}
+      <MarioBackground speed={0.8} />
       
       <AnimatePresence mode="wait">
         {isLoading ? (
@@ -143,16 +139,16 @@ export default function HomePage() {
             exit={{ opacity: 0 }}
             className="flex flex-col items-center justify-center h-screen"
           >
-            <h1 className="text-3xl mb-4 glitch" data-text="LOADING...">LOADING...</h1>
-            <div className="w-64 h-4 bg-gray-800 rounded-lg overflow-hidden">
+            <h1 className="text-3xl mb-4 text-white font-bold" style={{ textShadow: '2px 2px 0 #000' }}>LOADING...</h1>
+            <div className="w-64 h-6 bg-gray-800 rounded-lg overflow-hidden border-2 border-white">
               <motion.div 
-                className="h-full bg-green-500"
+                className="h-full bg-red-500"
                 initial={{ width: 0 }}
                 animate={{ width: "100%" }}
                 transition={{ duration: 2 }}
               />
             </div>
-            <p className="mt-4 text-xs blink">INITIALIZING SYSTEM...</p>
+            <p className="mt-4 text-lg text-white font-bold" style={{ textShadow: '2px 2px 0 #000' }}>PRESS START</p>
           </motion.div>
         ) : (
           <motion.div 
@@ -161,19 +157,25 @@ export default function HomePage() {
             animate={{ opacity: 1 }}
             className="min-h-screen flex flex-col relative z-10"
           >
-            <RetroHeader 
-              navigateTo={navigateTo} 
-              currentScreen={currentScreen}
-              toggleSound={toggleSound}
-              soundEnabled={soundEnabled}
-            />
-            <main className="flex-grow">
-              <GameScreen 
-                currentScreen={currentScreen} 
-                navigateTo={navigateTo}
+            <div className="bg-opacity-80 bg-blue-900 py-2 mb-2 border-b-4 border-yellow-500">
+              <RetroHeader 
+                navigateTo={navigateTo} 
+                currentScreen={currentScreen}
+                toggleSound={toggleSound}
+                soundEnabled={soundEnabled}
               />
+            </div>
+            <main className="flex-grow container mx-auto px-4">
+              <div className="bg-white bg-opacity-90 p-6 rounded-lg border-4 border-red-500 shadow-lg">
+                <GameScreen 
+                  currentScreen={currentScreen} 
+                  navigateTo={navigateTo}
+                />
+              </div>
             </main>
-            <RetroFooter />
+            <div className="mt-4 bg-opacity-80 bg-blue-900 py-2 border-t-4 border-yellow-500">
+              <RetroFooter />
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

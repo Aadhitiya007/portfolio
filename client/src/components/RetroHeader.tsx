@@ -36,7 +36,7 @@ export default function RetroHeader({
   ];
 
   return (
-    <header className="border-b-2 border-green-500 p-4 bg-black">
+    <header className="p-2">
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row md:justify-between items-center">
           <motion.div 
@@ -45,16 +45,20 @@ export default function RetroHeader({
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="mr-4 text-2xl font-bold bg-green-500 text-black p-2">
-              Aadhitiya M
+            <div className="mr-4 text-2xl font-bold text-white py-1 px-3 rounded" style={{ 
+              backgroundColor: '#E52521', 
+              textShadow: '2px 2px 0px #000',
+              boxShadow: '0px 3px 0px #000'
+            }}>
+              AADHITIYA M
             </div>
-            <div className="hidden md:block text-sm">
-              {time.toLocaleTimeString()} | Level 99 Developer
+            <div className="hidden md:block text-white font-bold" style={{ textShadow: '1px 1px 0 #000' }}>
+              {time.toLocaleTimeString()} | COINS: 99
             </div>
           </motion.div>
           
           <motion.nav 
-            className="flex space-x-1 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto"
+            className="flex flex-wrap gap-2 md:gap-3 pb-2 md:pb-0 w-full md:w-auto justify-center md:justify-end"
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -63,13 +67,17 @@ export default function RetroHeader({
               <motion.button
                 key={item.id}
                 onClick={() => navigateTo(item.id)}
-                className={`px-3 py-2 ${
-                  currentScreen === item.id 
-                    ? 'bg-green-500 text-black' 
-                    : 'bg-black text-green-500 border border-green-500 hover:bg-green-900'
-                } focus:outline-none transition-colors`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                className={`px-3 py-1 rounded font-bold focus:outline-none transition-all`}
+                style={{ 
+                  backgroundColor: currentScreen === item.id ? '#E52521' : '#FFC107', 
+                  color: 'white',
+                  textShadow: '1px 1px 0px #000',
+                  boxShadow: '0px 3px 0px #000',
+                  transform: currentScreen === item.id ? 'translateY(2px)' : 'translateY(0)',
+                  border: '2px solid #000'
+                }}
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95, y: 3 }}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index }}
@@ -79,11 +87,18 @@ export default function RetroHeader({
             ))}
             <motion.button
               onClick={toggleSound}
-              className="px-3 py-2 bg-black text-green-500 border border-green-500 hover:bg-green-900 focus:outline-none"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className="px-3 py-1 rounded font-bold focus:outline-none"
+              style={{ 
+                backgroundColor: '#4CAF50', 
+                color: 'white',
+                textShadow: '1px 1px 0px #000',
+                boxShadow: '0px 3px 0px #000',
+                border: '2px solid #000'
+              }}
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95, y: 3 }}
             >
-              {soundEnabled ? 'SOUND: ON' : 'SOUND: OFF'}
+              {soundEnabled ? '🔊 ON' : '🔇 OFF'}
             </motion.button>
           </motion.nav>
         </div>
