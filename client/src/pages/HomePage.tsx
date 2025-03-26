@@ -3,10 +3,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import Typewriter from "typewriter-effect";
 import { Howl } from "howler";
 
-// Components to be created
+// Components
 import RetroHeader from "../components/RetroHeader";
 import RetroFooter from "../components/RetroFooter";
 import GameScreen from "../components/GameScreen";
+import RetroBackground from "../components/RetroBackground";
 
 // Game sounds
 const sounds = {
@@ -125,7 +126,14 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-green-500 font-mono crt-scanline">
+    <div className="min-h-screen bg-black text-green-500 font-mono crt-scanline relative">
+      {/* Dynamic Matrix-like Background */}
+      <RetroBackground 
+        density={80} 
+        speed={0.8} 
+        color="rgba(0, 255, 0, 0.7)" 
+      />
+      
       <AnimatePresence mode="wait">
         {isLoading ? (
           <motion.div 
@@ -135,7 +143,7 @@ export default function HomePage() {
             exit={{ opacity: 0 }}
             className="flex flex-col items-center justify-center h-screen"
           >
-            <h1 className="text-3xl mb-4">LOADING...</h1>
+            <h1 className="text-3xl mb-4 glitch" data-text="LOADING...">LOADING...</h1>
             <div className="w-64 h-4 bg-gray-800 rounded-lg overflow-hidden">
               <motion.div 
                 className="h-full bg-green-500"
@@ -144,13 +152,14 @@ export default function HomePage() {
                 transition={{ duration: 2 }}
               />
             </div>
+            <p className="mt-4 text-xs blink">INITIALIZING SYSTEM...</p>
           </motion.div>
         ) : (
           <motion.div 
             key="content"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="min-h-screen flex flex-col"
+            className="min-h-screen flex flex-col relative z-10"
           >
             <RetroHeader 
               navigateTo={navigateTo} 
