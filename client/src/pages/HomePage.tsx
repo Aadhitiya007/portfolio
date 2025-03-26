@@ -53,6 +53,47 @@ export default function HomePage() {
     setCurrentScreen(screen);
   };
   
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // WASD or Arrow Keys for navigation
+      if (!isLoading) {
+        switch (e.key.toLowerCase()) {
+          case 'w':
+          case 'arrowup':
+            // Navigate to previous screen based on order
+            const screens = ['intro', 'about', 'skills', 'experience', 'projects', 'contact'];
+            const currentIndex = screens.indexOf(currentScreen);
+            if (currentIndex > 0) {
+              navigateTo(screens[currentIndex - 1]);
+            }
+            break;
+          case 's':
+          case 'arrowdown':
+            // Navigate to next screen based on order
+            const screenOrder = ['intro', 'about', 'skills', 'experience', 'projects', 'contact'];
+            const currIndex = screenOrder.indexOf(currentScreen);
+            if (currIndex < screenOrder.length - 1) {
+              navigateTo(screenOrder[currIndex + 1]);
+            }
+            break;
+          case 'm':
+            // Toggle sound
+            toggleSound();
+            break;
+          default:
+            break;
+        }
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [currentScreen, isLoading, soundEnabled]);
+  // eslint-disable-line react-hooks/exhaustive-deps - navigateTo and toggleSound are stable function references
+  
   // Implement smooth scrolling
   useEffect(() => {
     const handleAnchorClick = (e: MouseEvent) => {
@@ -84,7 +125,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-green-500 font-mono">
+    <div className="min-h-screen bg-black text-green-500 font-mono crt-scanline">
       <AnimatePresence mode="wait">
         {isLoading ? (
           <motion.div 
