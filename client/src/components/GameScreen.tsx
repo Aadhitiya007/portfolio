@@ -64,41 +64,67 @@ export default function GameScreen({ currentScreen, navigateTo }: GameScreenProp
                 className="mb-6 inline-block"
                 variants={itemVariants}
               >
-                <span className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-600">
+                <h1 className="text-5xl md:text-6xl font-bold text-white" style={{ textShadow: '3px 3px 0px #000' }}>
                   <Typewriter
                     options={{
-                      strings: ['Aadhitiya M', 'Software Engineer', 'Developer'],
+                      strings: ['Aadhitiya M', 'Software Engineer', 'Game Changer'],
                       autoStart: true,
                       loop: true,
                       delay: 80,
                     }}
                   />
-                </span>
+                </h1>
               </motion.div>
               
-              <motion.p 
-                className="text-xl mb-8 max-w-2xl mx-auto"
+              <motion.div 
+                className="relative mb-8 max-w-2xl mx-auto text-xl"
                 variants={itemVariants}
+                style={{ 
+                  backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                  border: '4px solid #fff',
+                  padding: '20px',
+                  borderRadius: '8px',
+                  color: 'white',
+                  textShadow: '1px 1px 0px #000'
+                }}
               >
-                Welcome to my retro game inspired portfolio. Press START or select a menu item to explore.
-              </motion.p>
+                <p>Welcome to my Super Mario inspired portfolio. Press START or use a menu item to explore my world!</p>
+              </motion.div>
               
               <motion.div
                 variants={itemVariants}
               >
                 <button
                   onClick={() => navigateTo('about')}
-                  className="bg-green-500 text-black px-8 py-4 text-xl hover:bg-green-600 transition-colors"
+                  className="font-bold text-xl px-12 py-4 rounded focus:outline-none"
+                  style={{ 
+                    backgroundColor: '#E52521', 
+                    color: 'white',
+                    textShadow: '2px 2px 0px #000',
+                    boxShadow: '0px 5px 0px #000',
+                    border: '3px solid #000',
+                    transform: 'perspective(100px) rotateX(5deg)'
+                  }}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  whileTap={{ scale: 0.95, y: 5, boxShadow: '0px 2px 0px #000' }}
                 >
-                  [PRESS START]
+                  PRESS START
                 </button>
               </motion.div>
               
               <motion.div 
-                className="mt-16 text-sm"
+                className="mt-16 text-sm font-bold"
                 variants={itemVariants}
+                animate={{ 
+                  y: [0, -5, 0],
+                  transition: {
+                    repeat: Infinity,
+                    duration: 1.5
+                  }
+                }}
+                style={{ color: 'white', textShadow: '1px 1px 0px #000' }}
               >
-                <p className="blink">Use navigation menu to explore different sections</p>
+                <p>Use [↑][↓] keys or menu buttons to navigate</p>
               </motion.div>
             </div>
           </motion.div>
@@ -115,50 +141,71 @@ export default function GameScreen({ currentScreen, navigateTo }: GameScreenProp
             exit="exit"
           >
             <motion.div
-              className="game-screen-header"
+              className="game-screen-header mb-6"
               variants={itemVariants}
             >
-              <h2 className="text-3xl font-bold mb-2 bg-green-500 text-black inline-block px-4 py-1">ABOUT ME</h2>
+              <h2 className="text-3xl font-bold text-white px-4 py-1 rounded" style={{ 
+                backgroundColor: '#E52521',
+                border: '3px solid #000',
+                textShadow: '2px 2px 0px #000',
+                boxShadow: '0px 3px 0px #000'
+              }}>ABOUT ME</h2>
             </motion.div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <motion.div
-                className="bg-black border-2 border-green-500 p-6"
+                className="p-6 rounded-lg"
                 variants={itemVariants}
+                style={{
+                  backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                  border: '3px solid #FFC107',
+                  boxShadow: '0px 4px 0px #000'
+                }}
               >
-                <h3 className="text-xl font-bold mb-4">CHARACTER STATS</h3>
-                <div className="mb-4">
-                  <p className="mb-2"><span className="text-green-300">NAME:</span> {personalInfo.name}</p>
-                  <p className="mb-2"><span className="text-green-300">CLASS:</span> {personalInfo.title}</p>
-                  <p className="mb-2"><span className="text-green-300">LOCATION:</span> {personalInfo.location}</p>
-                  <p className="mb-2"><span className="text-green-300">EMAIL:</span> {personalInfo.email}</p>
+                <h3 className="text-xl font-bold mb-4 text-white" style={{ textShadow: '1px 1px 0px #000' }}>PLAYER STATS</h3>
+                <div className="mb-4 text-white">
+                  <p className="mb-3"><span className="font-bold text-yellow-300">NAME:</span> {personalInfo.name}</p>
+                  <p className="mb-3"><span className="font-bold text-yellow-300">CLASS:</span> {personalInfo.title}</p>
+                  <p className="mb-3"><span className="font-bold text-yellow-300">WORLD:</span> {personalInfo.location}</p>
+                  <p className="mb-3"><span className="font-bold text-yellow-300">CONNECT:</span> {personalInfo.email}</p>
                 </div>
                 <div className="mt-6">
-                  <h4 className="text-lg font-bold mb-2">ACHIEVEMENTS</h4>
-                  <ul className="list-disc list-inside">
+                  <h4 className="text-lg font-bold mb-3 text-white" style={{ textShadow: '1px 1px 0px #000' }}>POWER-UPS COLLECTED</h4>
+                  <ul className="list-none space-y-2">
                     {achievements.map((achievement, index) => (
-                      <li key={index} className="mb-1">{achievement}</li>
+                      <li key={index} className="flex items-start text-white">
+                        <span className="mr-2 text-yellow-300 text-xl">★</span>
+                        <span>{achievement}</span>
+                      </li>
                     ))}
                   </ul>
                 </div>
               </motion.div>
               
               <motion.div
-                className="bg-black border-2 border-green-500 p-6"
+                className="p-6 rounded-lg"
                 variants={itemVariants}
+                style={{
+                  backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                  border: '3px solid #4CAF50',
+                  boxShadow: '0px 4px 0px #000'
+                }}
               >
-                <h3 className="text-xl font-bold mb-4">BACKSTORY</h3>
-                <p className="mb-4 leading-relaxed">{personalInfo.about}</p>
+                <h3 className="text-xl font-bold mb-4 text-white" style={{ textShadow: '1px 1px 0px #000' }}>MY STORY</h3>
+                <p className="mb-4 leading-relaxed text-white">{personalInfo.about}</p>
                 
-                <h3 className="text-xl font-bold mb-2 mt-6">EDUCATION</h3>
+                <h3 className="text-xl font-bold mt-6 mb-3 text-white" style={{ textShadow: '1px 1px 0px #000' }}>TRAINING LEVELS</h3>
                 {education.map((edu, index) => (
-                  <div key={index} className="mb-4">
-                    <p className="font-bold">{edu.degree}</p>
+                  <div key={index} className="mb-4 text-white">
+                    <p className="font-bold text-green-300">{edu.degree}</p>
                     <p>{edu.institution} | {edu.duration}</p>
-                    <p>{edu.location}</p>
-                    <ul className="mt-2 list-disc list-inside">
+                    <p className="mb-2">{edu.location}</p>
+                    <ul className="mt-2 list-none space-y-1">
                       {edu.achievements.map((achievement, i) => (
-                        <li key={i} className="text-sm">{achievement}</li>
+                        <li key={i} className="text-sm flex items-start">
+                          <span className="mr-2 text-green-300">➢</span>
+                          <span>{achievement}</span>
+                        </li>
                       ))}
                     </ul>
                   </div>
@@ -167,18 +214,36 @@ export default function GameScreen({ currentScreen, navigateTo }: GameScreenProp
             </div>
             
             <motion.div 
-              className="flex justify-center space-x-4 mt-8"
+              className="flex justify-center gap-4 mt-8"
               variants={itemVariants}
             >
               <button
                 onClick={() => navigateTo('intro')}
-                className="px-4 py-2 border border-green-500 hover:bg-green-900 transition-colors"
+                className="px-4 py-2 rounded font-bold focus:outline-none"
+                style={{ 
+                  backgroundColor: '#4169E1', 
+                  color: 'white',
+                  textShadow: '1px 1px 0px #000',
+                  boxShadow: '0px 3px 0px #000',
+                  border: '2px solid #000'
+                }}
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95, y: 3 }}
               >
                 ← BACK
               </button>
               <button
                 onClick={() => navigateTo('skills')}
-                className="px-4 py-2 border border-green-500 hover:bg-green-900 transition-colors"
+                className="px-4 py-2 rounded font-bold focus:outline-none"
+                style={{ 
+                  backgroundColor: '#4CAF50', 
+                  color: 'white',
+                  textShadow: '1px 1px 0px #000',
+                  boxShadow: '0px 3px 0px #000',
+                  border: '2px solid #000'
+                }}
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95, y: 3 }}
               >
                 NEXT →
               </button>
@@ -197,28 +262,39 @@ export default function GameScreen({ currentScreen, navigateTo }: GameScreenProp
             exit="exit"
           >
             <motion.div
-              className="game-screen-header"
+              className="game-screen-header mb-6"
               variants={itemVariants}
             >
-              <h2 className="text-3xl font-bold mb-2 bg-green-500 text-black inline-block px-4 py-1">SKILLS</h2>
+              <h2 className="text-3xl font-bold text-white px-4 py-1 rounded" style={{ 
+                backgroundColor: '#FFC107',
+                border: '3px solid #000',
+                textShadow: '2px 2px 0px #000',
+                boxShadow: '0px 3px 0px #000'
+              }}>SKILLS</h2>
             </motion.div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <motion.div
-                className="bg-black border-2 border-green-500 p-6"
+                className="p-6 rounded-lg"
                 variants={itemVariants}
+                style={{
+                  backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                  border: '3px solid #FFC107',
+                  boxShadow: '0px 4px 0px #000'
+                }}
               >
-                <h3 className="text-xl font-bold mb-4">TECHNICAL SKILLS</h3>
+                <h3 className="text-xl font-bold mb-4 text-white" style={{ textShadow: '1px 1px 0px #000' }}>TECHNICAL POWER</h3>
                 
                 {skills.technical.map((skill, index) => (
                   <div key={index} className="mb-4">
-                    <div className="flex justify-between mb-1">
-                      <span>{skill.name}</span>
+                    <div className="flex justify-between mb-1 text-white">
+                      <span className="font-bold">{skill.name}</span>
                       <span>{skill.level}/100</span>
                     </div>
-                    <div className="w-full h-4 bg-gray-800 rounded-lg overflow-hidden">
+                    <div className="w-full h-4 bg-gray-800 rounded-lg overflow-hidden border border-gray-700">
                       <motion.div 
-                        className="h-full bg-green-500"
+                        className="h-full"
+                        style={{ backgroundColor: '#FFC107' }}
                         initial={{ width: 0 }}
                         animate={{ width: `${skill.level}%` }}
                         transition={{ duration: 1, delay: index * 0.1 }}
@@ -229,17 +305,31 @@ export default function GameScreen({ currentScreen, navigateTo }: GameScreenProp
               </motion.div>
               
               <motion.div
-                className="bg-black border-2 border-green-500 p-6"
+                className="p-6 rounded-lg"
                 variants={itemVariants}
+                style={{
+                  backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                  border: '3px solid #E52521',
+                  boxShadow: '0px 4px 0px #000'
+                }}
               >
-                <h3 className="text-xl font-bold mb-4">SOFT SKILLS</h3>
+                <h3 className="text-xl font-bold mb-4 text-white" style={{ textShadow: '1px 1px 0px #000' }}>SOFT SKILLS</h3>
                 
                 <div className="grid grid-cols-2 gap-4">
                   {skills.soft.map((skill, index) => (
                     <motion.div 
                       key={index}
-                      className="border border-green-500 p-3 text-center"
-                      whileHover={{ scale: 1.05, backgroundColor: 'rgba(34, 197, 94, 0.2)' }}
+                      className="p-3 text-center rounded font-bold text-white"
+                      style={{
+                        backgroundColor: 'rgba(229, 37, 33, 0.3)',
+                        border: '2px solid #E52521',
+                        textShadow: '1px 1px 0px #000'
+                      }}
+                      whileHover={{ 
+                        scale: 1.05, 
+                        backgroundColor: 'rgba(229, 37, 33, 0.5)',
+                        y: -2
+                      }}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ 
                         opacity: 1, 
@@ -253,33 +343,63 @@ export default function GameScreen({ currentScreen, navigateTo }: GameScreenProp
                 </div>
                 
                 <div className="mt-8">
-                  <h3 className="text-xl font-bold mb-4">CLASS ABILITIES</h3>
-                  <ul className="list-disc list-inside">
-                    <li className="mb-2">Problem-solving under pressure</li>
-                    <li className="mb-2">Fast learning of new technologies</li>
-                    <li className="mb-2">Cross-functional team collaboration</li>
-                    <li className="mb-2">Clean code crafting</li>
+                  <h3 className="text-xl font-bold mb-4 text-white" style={{ textShadow: '1px 1px 0px #000' }}>POWER-UPS</h3>
+                  <ul className="list-none space-y-2">
+                    <li className="mb-2 flex items-start text-white">
+                      <span className="mr-2 text-red-500">★</span>
+                      <span>Problem-solving under pressure</span>
+                    </li>
+                    <li className="mb-2 flex items-start text-white">
+                      <span className="mr-2 text-red-500">★</span>
+                      <span>Fast learning of new technologies</span>
+                    </li>
+                    <li className="mb-2 flex items-start text-white">
+                      <span className="mr-2 text-red-500">★</span>
+                      <span>Cross-functional team collaboration</span>
+                    </li>
+                    <li className="mb-2 flex items-start text-white">
+                      <span className="mr-2 text-red-500">★</span>
+                      <span>Clean code crafting</span>
+                    </li>
                   </ul>
                 </div>
               </motion.div>
             </div>
             
             <motion.div 
-              className="flex justify-center space-x-4 mt-8"
+              className="flex justify-center gap-4 mt-8"
               variants={itemVariants}
             >
-              <button
+              <motion.button
                 onClick={() => navigateTo('about')}
-                className="px-4 py-2 border border-green-500 hover:bg-green-900 transition-colors"
+                className="px-4 py-2 rounded font-bold focus:outline-none"
+                style={{ 
+                  backgroundColor: '#4169E1', 
+                  color: 'white',
+                  textShadow: '1px 1px 0px #000',
+                  boxShadow: '0px 3px 0px #000',
+                  border: '2px solid #000'
+                }}
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95, y: 3 }}
               >
                 ← BACK
-              </button>
-              <button
+              </motion.button>
+              <motion.button
                 onClick={() => navigateTo('experience')}
-                className="px-4 py-2 border border-green-500 hover:bg-green-900 transition-colors"
+                className="px-4 py-2 rounded font-bold focus:outline-none"
+                style={{ 
+                  backgroundColor: '#4CAF50', 
+                  color: 'white',
+                  textShadow: '1px 1px 0px #000',
+                  boxShadow: '0px 3px 0px #000',
+                  border: '2px solid #000'
+                }}
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95, y: 3 }}
               >
                 NEXT →
-              </button>
+              </motion.button>
             </motion.div>
           </motion.div>
         )}
