@@ -1,0 +1,14 @@
+[nix]
+channel = "stable-24_05"
+
+[workflows]
+runButton = "Start"
+
+[[workflows.workflow]]
+name = "Start"
+author = 40880127
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev"
