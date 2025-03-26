@@ -20,7 +20,7 @@ export function useSoundEffects(): SoundEffects {
   useEffect(() => {
     // Create the background music instance
     const bgMusic = new Howl({
-      src: ['./Stage Win (Super Mario) - QuickSounds.com.mp3'],
+      src: ['/mario-theme.mp3'],
       loop: true,
       volume: volumeLevel,
       autoplay: false,
